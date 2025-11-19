@@ -1,0 +1,19 @@
+Crie uma página Next.js App Router em app/products/[id]/page.tsx que:
+
+REQUISITOS:
+- Receba o ID do produto via params
+- Busque dados do produto via Server Component usando Prisma
+- Implemente metadata dinâmica (title, description, OpenGraph)
+- Trate casos de produto não encontrado (404)
+- Use TypeScript com types bem definidos
+- Aplique Suspense para loading states
+
+ESTRUTURA:
+- Use a função generateMetadata para SEO
+- Componente principal deve ser async
+- Inclua try-catch para erros do Prisma
+- Retorne notFound() quando apropriado
+
+DADOS:
+- O modelo Prisma é "Product" com: id, name, description, price, imageUrl, categoryId
+- A conexão Prisma está em @/lib/prisma

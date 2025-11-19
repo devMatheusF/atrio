@@ -1,0 +1,29 @@
+Crie um service layer em lib/services/productService.ts que:
+
+FUNÇÕES:
+- getProducts(filters): lista com paginação, filtros, ordenação
+- getProductById(id): busca único com relações
+- createProduct(data): cria novo (validar dados)
+- updateProduct(id, data): atualiza existente
+- deleteProduct(id): soft delete (isActive = false)
+- searchProducts(query): busca full-text
+
+FILTROS AVANÇADOS:
+- categoryId, minPrice, maxPrice, inStock
+- Paginação: page, pageSize
+- Ordenação: sortBy (price, name, createdAt), sortOrder (asc, desc)
+
+VALIDAÇÕES:
+- Use Zod schemas para validar inputs
+- Retorne erros tipados (Result type ou throw)
+- Sanitize strings de busca
+
+RELAÇÕES:
+- Include category, images, reviews conforme necessário
+- Conte reviews e calcule rating médio
+- Otimize queries (select apenas necessário)
+
+TYPES:
+- ProductFilters, CreateProductDTO, UpdateProductDTO
+- PaginatedResponse<Product>
+- Export todos os types

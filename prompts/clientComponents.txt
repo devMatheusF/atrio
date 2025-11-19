@@ -1,0 +1,32 @@
+Crie um Client Component InteractiveFilter em components/filters/InteractiveFilter.tsx que:
+
+"use client" - MARCAR EXPLICITAMENTE
+
+STATE LOCAL:
+- selectedCategories: string[]
+- priceRange: [min, max]
+- sortBy: string
+- isOpen: boolean (para mobile)
+
+INTERATIVIDADE:
+- Checkboxes para categorias (múltipla seleção)
+- Slider para faixa de preço (MUI Slider)
+- Select para ordenação
+- Botão "Aplicar Filtros"
+- Botão "Limpar Filtros"
+
+INTEGRAÇÃO:
+- Receba onFilterChange callback
+- Receba categories array e priceRange limits via props
+- Sincronize com URL searchParams (useSearchParams)
+- Debounce no slider (evite updates excessivos)
+
+RESPONSIVO:
+- Desktop: sidebar fixa
+- Mobile: drawer/modal com botão toggle
+- Use MUI Drawer ou Dialog
+
+PERFORMANCE:
+- useMemo para computações pesadas
+- useCallback para funções passadas a children
+- Lazy load categorias se lista grande

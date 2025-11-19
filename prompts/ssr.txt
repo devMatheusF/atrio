@@ -1,0 +1,22 @@
+Implemente Server-Side Rendering na página app/dashboard/page.tsx que:
+
+DADOS SSR:
+- Busque estatísticas do usuário (orders, favorites, recentViews) do Prisma
+- Busque recomendações personalizadas baseadas no histórico
+- Agregue dados de múltiplas tabelas (JOIN)
+- Cache com revalidate: 60 (revalidar a cada 60 segundos)
+
+AUTENTICAÇÃO:
+- Verifique sessão do usuário (assumindo NextAuth ou similar)
+- Redirecione para /login se não autenticado
+- Passe userId para queries do Prisma
+
+PERFORMANCE:
+- Use Promise.all para queries paralelas
+- Selecione apenas campos necessários (select do Prisma)
+- Implemente error boundary para falhas
+
+TYPES:
+- Defina DashboardData interface
+- Type-safe nas queries Prisma
+- Serialize datas corretamente (toISOString)

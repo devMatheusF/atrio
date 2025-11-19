@@ -1,0 +1,23 @@
+[CONTEXTO DO PROJETO]
+[OBJETIVO ESPECÍFICO]
+
+REQUISITOS FUNCIONAIS:
+- Item 1
+- Item 2
+
+REQUISITOS TÉCNICOS:
+- Stack/libs específicas
+- Patterns a seguir
+
+ESTRUTURA DE ARQUIVOS:
+- Onde criar
+- Imports necessários
+
+TYPES/INTERFACES:
+- Definições TypeScript
+
+TRATAMENTO DE ERROS:
+- Como lidar com casos edge
+
+TESTES (opcional):
+- Cenários a cobrir

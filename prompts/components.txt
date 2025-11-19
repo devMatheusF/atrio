@@ -1,0 +1,24 @@
+Crie um componente ProductCard em components/products/ProductCard.tsx que:
+
+DESIGN (MUI):
+- Use Card, CardMedia, CardContent, CardActions do @mui/material
+- Implemente hover effect com elevation
+- Badge para desconto (se houver)
+- Button primário "Adicionar ao Carrinho"
+- IconButton para favoritar (coração)
+
+FUNCIONALIDADES:
+- Receba props: product (Product type), onAddToCart, onFavorite
+- Formate preço com Intl.NumberFormat (BRL)
+- Mostre badge de desconto se price < originalPrice
+- Loading state no botão ao adicionar carrinho
+- Otimize imagem com Next Image
+
+TYPESCRIPT:
+- Defina interface ProductCardProps
+- Export do tipo Product se necessário
+- Props opcionais com valores default
+
+ACESSIBILIDADE:
+- aria-labels nos IconButtons
+- alt descritivo nas imagens

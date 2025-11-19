@@ -1,0 +1,33 @@
+Crie um formulário ProductForm em components/forms/ProductForm.tsx usando React Hook Form:
+
+CAMPOS:
+- name: string, obrigatório, min 3, max 100
+- description: string, obrigatório, min 10
+- price: number, obrigatório, min 0.01
+- categoryId: select, obrigatório
+- imageUrl: string, URL válida
+- inStock: boolean, default true
+
+VALIDAÇÃO:
+- Use Zod schema com zodResolver
+- Mensagens de erro em português
+- Validação em tempo real (mode: onChange)
+- Mostre erros abaixo dos campos
+
+UI (MUI):
+- TextField para inputs de texto
+- Select para category (carregue de API/store)
+- Checkbox para inStock
+- Button submit com loading state
+- Organize em Grid responsivo
+
+FUNCIONALIDADES:
+- Modo create/edit (detecte por productId prop)
+- Pre-preencha dados em modo edit
+- Desabilite form durante submit
+- Toast de sucesso/erro
+- Reset form após sucesso
+
+TYPES:
+- ProductFormData interface (do schema Zod)
+- Props: productId?, onSuccess, onCancel

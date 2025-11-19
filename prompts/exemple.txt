@@ -1,0 +1,31 @@
+Crie um fluxo completo de checkout com:
+
+1. PÁGINA (app/checkout/page.tsx):
+   - Server Component que valida carrinho
+   - Busca endereços salvos do usuário (Prisma)
+   - Calcula frete e impostos
+
+2. COMPONENTES:
+   - CheckoutSummary: mostra itens e total
+   - AddressSelector: select/cria endereço
+   - PaymentForm: dados cartão (react-hook-form + Zod)
+
+3. STORE:
+   - checkoutStore: gerencia step atual, loading, errors
+
+4. SERVICE:
+   - checkoutService: cria order no Prisma
+   - Integra com API de pagamento
+   - Envia email confirmação
+
+5. VALIDAÇÕES:
+   - Estoque disponível antes de finalizar
+   - CEP válido
+   - Cartão válido (Luhn algorithm)
+
+Organize arquivos em:
+/app/checkout/page.tsx
+/components/checkout/...
+/stores/checkoutStore.ts
+/lib/services/checkoutService.ts
+/lib/validations/checkoutSchemas.ts

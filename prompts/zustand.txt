@@ -1,0 +1,27 @@
+Crie uma store Zustand em stores/cartStore.ts para gerenciar carrinho de compras:
+
+STATE:
+- items: array de CartItem (productId, quantity, price, name, imageUrl)
+- total: número calculado
+- isLoading: boolean
+
+ACTIONS:
+- addItem(product): adiciona ou incrementa quantidade
+- removeItem(productId): remove produto
+- updateQuantity(productId, quantity): atualiza quantidade
+- clearCart(): limpa carrinho
+- loadCart(): carrega do localStorage (client-side)
+
+FEATURES:
+- Persista no localStorage com middleware persist do zustand
+- Calcule total automaticamente quando items mudar
+- Valide quantidade mínima (1) e máxima (99)
+- Adicione toast notifications (react-hot-toast) nas ações
+
+TYPESCRIPT:
+- Interface CartItem com todos os campos
+- Interface CartStore com state + actions
+- Types exportados para uso externo
+
+HOOKS:
+- Export hooks seletores: useCartItems, useCartTotal, useCartActions
