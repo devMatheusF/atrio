@@ -14,7 +14,8 @@ import {
 
 export default function Home() {
   return (
-    <Box sx={{ bgcolor: colors.background.default, pb: 8 }}>      
+    <Box sx={{ bgcolor: colors.background.default, pb: 8 }}>
+      <Header />
       <Hero />
       <Collections />
       <MostPurchasedEvents />
