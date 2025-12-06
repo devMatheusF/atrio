@@ -6,6 +6,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { colors } from "../../theme/tokens/colors";
 import { shadows } from "../../theme/tokens/shadows";
+import { spacing } from "@/app/theme/tokens/spacing";
 
 export function Hero() {
   return (
@@ -34,7 +35,7 @@ export function Hero() {
         </IconButton>
 
         <CarouselCard
-          image="https://source.unsplash.com/random/800x400?concert"
+          image="https://media.istockphoto.com/id/1473077427/pt/vetorial/catholic-church-building-isolated-on-white-background-religious-architecture-facade-tall.jpg?s=612x612&w=0&k=20&c=cDtfqFVlfGyUV2qqTR4wzS_UDzpGOQa-XMuWF6kMbXs="
           title="Fafá de Belém - Sucessos"
           date="19 de Novembro às 21h"
           location="Porto Alegre - RS"
@@ -81,6 +82,7 @@ function CarouselCard({
         overflow: "hidden",
         width: "100%",
         maxWidth: 1000,
+        padding: spacing.sm,
         mx: "auto",
         cursor: "pointer",
         transition: "transform .2s",
