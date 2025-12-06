@@ -36,7 +36,7 @@ export function CreateEventWidget() {
       >
         <Box sx={{ flex: 1 }}>
           <Typography fontWeight={700} fontSize="1.5rem" mb={1}>
-            Crie seu evento com a Atrium
+            Crie seu evento com a Átrio
           </Typography>
           <Typography variant="body1" sx={{ color: colors.neutral[100], mb: 3 }}>
             Gere ingressos, controle vendas e faça a gestão completa em um só

@@ -9,28 +9,28 @@ export function MostPurchasedEvents() {
       date: "Hoje, 22h",
       location: "Curitiba - PR",
       priceRange: "A partir de R$ 95",
-      image: "https://source.unsplash.com/random/800x800?party",
+      image: "https://media.istockphoto.com/id/1473077427/pt/vetorial/catholic-church-building-isolated-on-white-background-religious-architecture-facade-tall.jpg?s=612x612&w=0&k=20&c=cDtfqFVlfGyUV2qqTR4wzS_UDzpGOQa-XMuWF6kMbXs=",
     },
     {
       title: "Workshop de Marketing Digital",
       date: "Amanhã, 19h",
       location: "Online",
       priceRange: "A partir de R$ 59",
-      image: "https://source.unsplash.com/random/800x800?workshop",
+      image: "https://media.istockphoto.com/id/1473077427/pt/vetorial/catholic-church-building-isolated-on-white-background-religious-architecture-facade-tall.jpg?s=612x612&w=0&k=20&c=cDtfqFVlfGyUV2qqTR4wzS_UDzpGOQa-XMuWF6kMbXs=",
     },
     {
       title: "Passeio Gastronômico",
       date: "23 Nov, 12h",
       location: "São Paulo - SP",
       priceRange: "A partir de R$ 180",
-      image: "https://source.unsplash.com/random/800x800?food",
+      image: "https://media.istockphoto.com/id/1473077427/pt/vetorial/catholic-church-building-isolated-on-white-background-religious-architecture-facade-tall.jpg?s=612x612&w=0&k=20&c=cDtfqFVlfGyUV2qqTR4wzS_UDzpGOQa-XMuWF6kMbXs=",
     },
     {
       title: "Corrida Noturna da Lagoa",
       date: "25 Nov, 20h",
       location: "Rio de Janeiro - RJ",
       priceRange: "A partir de R$ 75",
-      image: "https://source.unsplash.com/random/800x800?running",
+      image: "https://media.istockphoto.com/id/1473077427/pt/vetorial/catholic-church-building-isolated-on-white-background-religious-architecture-facade-tall.jpg?s=612x612&w=0&k=20&c=cDtfqFVlfGyUV2qqTR4wzS_UDzpGOQa-XMuWF6kMbXs=",
     },
   ];
 

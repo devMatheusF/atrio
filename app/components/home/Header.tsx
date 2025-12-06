@@ -21,7 +21,7 @@ export function Header() {
       }}
     >
       <Typography fontWeight="bold" fontSize="1.4rem" sx={{ color: colors.secondary[500] }}>
-        Atrium{" "}
+        Átrio{" "}
         <Box component="span" sx={{ color: colors.text.onPrimary, fontWeight: 400 }}>
           Platform
         </Box>

@@ -1,8 +1,10 @@
 "use client";
 
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CardMedia, Container, Typography } from "@mui/material";
+import Link from '@mui/material/Link';
 import { colors } from "../../theme/tokens/colors";
 import { shadows } from "../../theme/tokens/shadows";
+import { spacing } from "@/app/theme/tokens/spacing";
 
 export type EventCardInfo = {
   title: string;
@@ -63,12 +65,11 @@ export function EventsSection({
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: {
-            xs: "repeat(1, minmax(0, 1fr))",
-            sm: "repeat(2, minmax(0, 1fr))",
-            md: "repeat(4, minmax(0, 1fr))",
-          },
-          gap: 2,
+          gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+          gridAutoFlow: "column",
+          justifyContent: "start",
+          padding: { xs: spacing.sm, md: spacing.md },
+          gap: 4,
         }}
       >
         {events.map((event) => (
@@ -81,24 +82,30 @@ export function EventsSection({
 
 function EventCard(event: EventCardInfo) {
   return (
-    <Card
-      sx={{
-        borderRadius: 3,
-        overflow: "hidden",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        border: "1px solid transparent",
-        bgcolor: colors.neutral[0],
-        transition: "all 0.3s ease",
-        boxShadow: "none",
-        "&:hover": {
-          borderColor: colors.primary[100],
-          boxShadow: shadows.card,
-        },
-      }}
-    >
-      <CardMedia component="img" height={160} image={event.image} alt={event.title} />
+    <Link href="#" underline="none" sx={{display: 'flex', gap: spacing.sm, flexDirection: 'column'}}>
+      <Card
+        sx={{
+          borderRadius: 1,
+          overflow: "hidden",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          minWidth: 240,
+          maxWidth: 240,
+          minHeight: 114,
+          maxHeight: 114,
+          border: "1px solid transparent",
+          bgcolor: colors.neutral[0],
+          transition: "all 0.3s ease",
+          boxShadow: "none",
+          "&:hover": {
+            borderColor: colors.primary[100],
+            boxShadow: shadows.card,
+          },
+        }}
+      >
+        <CardMedia component="img" height={160} image={event.image} alt={event.title} />
+      </Card>
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography fontWeight={600} mb={0.5}>
           {event.title}
@@ -113,22 +120,7 @@ function EventCard(event: EventCardInfo) {
           {event.priceRange}
         </Typography>
       </CardContent>
-      <CardActions sx={{ pt: 0, px: 2, pb: 2 }}>
-        <Button
-          size="small"
-          variant="contained"
-          sx={{
-            bgcolor: colors.primary[500],
-            color: colors.text.onPrimary,
-            textTransform: "none",
-            borderRadius: 999,
-            px: 2,
-            "&:hover": { bgcolor: colors.primary[700] },
-          }}
-        >
-          Ver detalhes
-        </Button>
-      </CardActions>
-    </Card>
+    </Link>
+    
   );
 }
