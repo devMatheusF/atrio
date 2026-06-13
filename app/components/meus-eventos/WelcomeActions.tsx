@@ -35,10 +35,10 @@ export function WelcomeActions({ userName }: WelcomeActionsProps) {
         </Stack>
 
         <Stack direction={{ xs: "column", sm: "row" }} sx={{ gap: `${spacing.lg}px` }}>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" href="/criar-evento?presencial">
             Criar evento presencial
           </Button>
-          <Button variant="outlined" color="primary">
+          <Button variant="outlined" color="primary" href="/criar-evento?online">
             Criar evento online
           </Button>
         </Stack>

@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: atrio-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: atrio
+      POSTGRES_PASSWORD: atrio
+      POSTGRES_DB: atrio_dev
+    volumes:
+      - atrio_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  atrio_postgres_data:
