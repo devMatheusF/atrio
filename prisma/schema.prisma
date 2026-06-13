@@ -94,6 +94,7 @@ model User {
   phone           String?
   document        String?          @unique
   role            UserRole         @default(USER)
+  active          Boolean          @default(true)
   createdAt       DateTime         @default(now()) @map("created_at")
   updatedAt       DateTime         @updatedAt @map("updated_at")
   promoterProfile PromoterProfile?
