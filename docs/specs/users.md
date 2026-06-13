@@ -122,6 +122,5 @@ demais entidades.
 - Definir provider e modelo de implementação de autenticação.
 - Definir formato de armazenamento dos campos necessários para verificação de
   e-mail.
-- Atualizar o schema Prisma para incluir ao menos `active` e campos de
-  verificação de e-mail.
+- Atualizar o schema Prisma para incluir campos de verificação de e-mail.
 - Definir onde registrar o aceite dos termos para criação de eventos.

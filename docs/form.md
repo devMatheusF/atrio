@@ -85,7 +85,7 @@ O fluxo padrão para criar um formulário é:
    - `useForm` + `zodResolver`.
    - Uso de `FormContainer` (ou layout equivalente descrito em `docs/ui.md`).
    - Campos integrados via `Controller` quando necessário.
-5. Integrar com serviços em `app/services/<dominio>` (submit).
+5. Integrar o submit com actions/route handlers que usem a factory de services em `app/services/factory.ts`.
 
 ---
 
@@ -135,7 +135,8 @@ import { FormContainer } from "@/app/components/FormContainer";
 import { spacing } from "@/app/theme/tokens/spacing";
 import { colors } from "@/app/theme/tokens/colors";
 // import { useUiStore } from "@/app/store/uiStore"; // se existir para snackbar
-// import { createEvent } from "@/app/services/events"; // exemplo de service
+// O submit deve chamar uma server action ou route handler.
+// A action/handler usa `services` de "@/app/services/factory".
 
 type CreateEventFormProps = {
   onSuccess?: () => void;
@@ -354,19 +355,22 @@ const onSubmit = (values: CreateEventFormValues) => {
 };
 
 ### 7.2. Serviços
-Services devem ficar em app/services/<dominio>/index.ts (como descrito no AGENTS.md).
-O formulário chama o service e lida com erros de forma amigável.
+Contratos de services devem ficar em `app/services/<dominio>`.
+Implementações concretas ficam em `app/infrastructure`.
+O formulário não deve importar Prisma nem implementações concretas. Para mutations, prefira chamar uma server action ou route handler que consuma a factory de services.
 
 ```
-// app/services/events/index.ts
-export async function createEvent(payload: CreateEventFormValues) {
-  // chamada HTTP/Prisma/etc.
+// app/actions/events/createEventAction.ts ou route handler equivalente
+import { services } from "@/app/services/factory";
+
+export async function createEventAction(payload: CreateEventFormValues) {
+  return services.getEvents().create(payload);
 }
 
 const onSubmit = async (data: CreateEventFormValues) => {
   try {
     setIsSubmitting(true);
-    await createEvent(data);
+    await createEventAction(data);
     // showSnackbar sucesso
   } catch (error) {
     // showSnackbar erro
