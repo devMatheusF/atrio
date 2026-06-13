@@ -5,9 +5,10 @@ import { Box, Container, Stack, Typography } from "@mui/material";
 import { MyEventsSection, WelcomeActions } from "@/app/components/meus-eventos";
 import { colors } from "@/app/theme/tokens/colors";
 import { spacing } from "@/app/theme/tokens/spacing";
+import { EventItem } from "@/app/components/meus-eventos/MyEventsSection";
 
 export default function MeusEventosPage() {
-  const mockEvents = [
+  const mockEvents: EventItem[] = [
     {
       id: "1",
       name: "Conferência Luz e Vida 2024",

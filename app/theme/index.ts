@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, type Shadows } from '@mui/material/styles';
 import { colors } from './tokens/colors';
 import { spacing } from './tokens/spacing';
 import { radius } from './tokens/radius';
@@ -39,5 +39,5 @@ export const theme = createTheme({
   typography: {
     fontFamily: typography.fontFamily.base,
   },
-  shadows: shadows.mui as any,
+  shadows: shadows.mui as unknown as Shadows,
 });

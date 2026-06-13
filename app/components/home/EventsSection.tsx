@@ -1,7 +1,19 @@
 "use client";
 
-import { Box, Button, Card, CardContent, CardMedia, Container, Typography } from "@mui/material";
-import Link from '@mui/material/Link';
+import { useCallback, useRef } from "react";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Container,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import Link from "@mui/material/Link";
 import { colors } from "../../theme/tokens/colors";
 import { shadows } from "../../theme/tokens/shadows";
 import { spacing } from "@/app/theme/tokens/spacing";
@@ -23,6 +35,17 @@ export function EventsSection({
   subtitle: string;
   events: EventCardInfo[];
 }) {
+  const carouselRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollByAmount = useCallback((direction: "left" | "right") => {
+    const container = carouselRef.current;
+    if (!container) return;
+
+    const scrollAmount = container.clientWidth * 0.8;
+    const delta = direction === "right" ? scrollAmount : -scrollAmount;
+    container.scrollBy({ left: delta, behavior: "smooth" });
+  }, []);
+
   return (
     <Container sx={{ mt: 6 }}>
       <Box
@@ -62,19 +85,74 @@ export function EventsSection({
         </Button>
       </Box>
 
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-          gridAutoFlow: "column",
-          justifyContent: "start",
-          padding: { xs: spacing.sm, md: spacing.md },
-          gap: 4,
-        }}
-      >
-        {events.map((event) => (
-          <EventCard key={event.title} {...event} />
-        ))}
+      <Box sx={{ position: "relative" }}>
+        <Box
+          ref={carouselRef}
+          sx={{
+            display: "flex",
+            alignItems: "stretch",
+            padding: { xs: spacing.sm, md: spacing.md },
+            gap: 4,
+            overflowX: "auto",
+            overflowY: "hidden",
+            scrollSnapType: "x mandatory",
+            scrollBehavior: "smooth",
+            overscrollBehaviorX: "contain",
+            WebkitOverflowScrolling: "touch",
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+          }}
+        >
+          {events.map((event, index) => (
+            <EventCard key={index} {...event} />
+          ))}
+        </Box>
+
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: "100%",
+            px: 1,
+            display: "flex",
+            justifyContent: "space-between",
+            pointerEvents: "none",
+          }}
+        >
+          <IconButton
+            aria-label="Evento anterior"
+            onClick={() => scrollByAmount("left")}
+            sx={{
+              pointerEvents: "auto",
+              bgcolor: colors.neutral[0],
+              border: `1px solid ${colors.primary[100]}`,
+              boxShadow: shadows.card,
+              "&:hover": {
+                bgcolor: colors.primary[100],
+              },
+            }}
+          >
+            <ArrowBackIosNewIcon fontSize="small" />
+          </IconButton>
+          <IconButton
+            aria-label="Próximo evento"
+            onClick={() => scrollByAmount("right")}
+            sx={{
+              pointerEvents: "auto",
+              bgcolor: colors.neutral[0],
+              border: `1px solid ${colors.primary[100]}`,
+              boxShadow: shadows.card,
+              "&:hover": {
+                bgcolor: colors.primary[100],
+              },
+            }}
+          >
+            <ArrowForwardIosIcon fontSize="small" />
+          </IconButton>
+        </Box>
       </Box>
     </Container>
   );
@@ -82,7 +160,18 @@ export function EventsSection({
 
 function EventCard(event: EventCardInfo) {
   return (
-    <Link href="#" underline="none" sx={{display: 'flex', gap: spacing.sm, flexDirection: 'column'}}>
+    <Link
+      href="#"
+      underline="none"
+      sx={{
+        display: "flex",
+        gap: spacing.sm,
+        flexDirection: "column",
+        flex: "0 0 240px",
+        minWidth: 240,
+        scrollSnapAlign: "start",
+      }}
+    >
       <Card
         sx={{
           borderRadius: 1,
@@ -90,8 +179,8 @@ function EventCard(event: EventCardInfo) {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          minWidth: 240,
-          maxWidth: 240,
+          minWidth: "100%",
+          maxWidth: "100%",
           minHeight: 114,
           maxHeight: 114,
           border: "1px solid transparent",

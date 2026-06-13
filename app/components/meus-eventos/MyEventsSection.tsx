@@ -7,7 +7,6 @@ import {
   Box,
   Button,
   Chip,
-  Grid,
   LinearProgress,
   MenuItem,
   TextField,
@@ -23,11 +22,10 @@ import {
 import { colors } from "@/app/theme/tokens/colors";
 import { radius } from "@/app/theme/tokens/radius";
 import { spacing } from "@/app/theme/tokens/spacing";
-import { sizes } from "@/app/theme/tokens/sizes";
 
 type EventStatus = "published" | "closed";
 
-type EventItem = {
+export type EventItem = {
   id: string;
   name: string;
   date: string;
@@ -124,63 +122,57 @@ export function MyEventsSection({ events = [] }: MyEventsSectionProps) {
           onSubmit={handleSubmit(onSubmit)}
           sx={{ bgcolor: colors.background.default, borderRadius: `${radius.xs}px`, p: `${spacing.md}px` }}
         >
-          <Grid container>
-            <Grid container spacing={10} sx={{ flexGrow: 1 }}>
-              <Grid>
-                <Controller
-                  name="search"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      fullWidth
-                      label="Buscar pelo nome do evento"
-                      placeholder="Ex.: Conferência Jovem"
-                      error={!!errors.search}
-                      helperText={errors.search?.message}
-                    />
-                  )}
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", md: "1fr 0.6fr 0.4fr" },
+              gap: `${spacing.md}px`,
+              alignItems: "flex-end",
+            }}
+          >
+            <Controller
+              name="search"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  label="Buscar pelo nome do evento"
+                  placeholder="Ex.: Conferência Jovem"
+                  error={!!errors.search}
+                  helperText={errors.search?.message}
                 />
-              </Grid>
-              <Grid>
-                <Controller
-                  name="status"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      select
-                      fullWidth={false}
-                      sx={{minWidth: sizes.md * 10}}
-                      label="Filtrar por..."
-                      error={!!errors.status}
-                      helperText={errors.status?.message}
-                    >
-                      <MenuItem value="">Todos</MenuItem>
-                      <MenuItem value="published">Eventos publicados</MenuItem>
-                      <MenuItem value="closed">Eventos encerrados</MenuItem>
-                    </TextField>
-                  )}
-                />
-              </Grid>
-            </Grid>
-            
-            <Grid              
-              sx={{
-                display: "flex",
-                alignItems: "flex-end",
-                gap: `${spacing.sm}px`,
-                justifyContent: { xs: "flex-start", md: "flex-end" },
-              }}
-            >
+              )}
+            />
+
+            <Controller
+              name="status"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  select
+                  fullWidth
+                  label="Filtrar por..."
+                  error={!!errors.status}
+                  helperText={errors.status?.message}
+                >
+                  <MenuItem value="">Todos</MenuItem>
+                  <MenuItem value="published">Eventos publicados</MenuItem>
+                  <MenuItem value="closed">Eventos encerrados</MenuItem>
+                </TextField>
+              )}
+            />
+
+            <Box sx={{ display: "flex", gap: `${spacing.sm}px`, justifyContent: { xs: "flex-start", md: "flex-end" } }}>
               <Button type="submit" variant="contained" color="primary">
                 Aplicar
               </Button>
               <Button type="button" variant="text" color="primary" onClick={handleClear}>
                 Limpar
               </Button>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Box>
 
         <Stack sx={{ gap: `${spacing.md}px` }}>

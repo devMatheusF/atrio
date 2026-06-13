@@ -31,7 +31,7 @@ export function MostPurchasedEvents() {
       location: "Rio de Janeiro - RJ",
       priceRange: "A partir de R$ 75",
       image: "https://media.istockphoto.com/id/1473077427/pt/vetorial/catholic-church-building-isolated-on-white-background-religious-architecture-facade-tall.jpg?s=612x612&w=0&k=20&c=cDtfqFVlfGyUV2qqTR4wzS_UDzpGOQa-XMuWF6kMbXs=",
-    },
+    }
   ];
 
   return (
