@@ -9,6 +9,7 @@ export type {
   DeactivateUserInput,
   FindUserByEmailInput,
   FindUserByIdInput,
+  UserLockedReason,
   UserOutput,
   UserRole,
 } from "./users/types";
