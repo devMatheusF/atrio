@@ -16,7 +16,7 @@ plataforma.
 - Login com e-mail e senha.
 - Social login com Google e Facebook via NextAuth.
 - Verificação de e-mail.
-- Sessões persistidas em banco com JWT.
+- Sessões persistidas em banco via Auth.js database session.
 - Múltiplas sessões por usuário.
 - Reset de senha.
 - Bloqueio temporário após tentativas inválidas em fluxos sensíveis.
@@ -96,24 +96,29 @@ plataforma.
 30. Tokens sensíveis devem ser armazenados hasheados.
 31. Token de verificação de e-mail deve expirar em 24 horas.
 32. Reenvio de verificação de e-mail deve ser limitado a 1 solicitação por hora.
-33. Sessões devem durar 30 dias.
-34. O refresh token deve durar 30 dias e ser armazenado hasheado.
-35. Mesmo com JWT válido, o acesso deve ser negado se a sessão não existir,
-    estiver expirada ou estiver revogada no banco.
-36. Logout deve limpar cookie/token e revogar a sessão no banco.
-37. A aplicação deve permitir múltiplas sessões por usuário/dispositivo.
-38. Qualquer fluxo sensível de auth deve bloquear temporariamente a conta na 4ª
+33. Sessões devem usar a estratégia `database` do Auth.js.
+34. Sessões devem durar 30 dias.
+35. O cookie deve ser `HttpOnly` e carregar apenas o identificador opaco da
+    sessão, não dados sensíveis do usuário.
+36. O acesso deve ser negado se a sessão não existir, estiver expirada ou
+    estiver revogada no banco.
+37. Logout deve limpar o cookie e revogar/remover a sessão no banco.
+38. A aplicação deve permitir múltiplas sessões por usuário/dispositivo.
+39. Qualquer fluxo sensível de auth deve bloquear temporariamente a conta na 4ª
     tentativa inválida.
-39. O bloqueio temporário deve durar 2 horas.
-40. Após 2 horas, o usuário pode solicitar desbloqueio via e-mail.
-41. Usuário bloqueado ou inativo não deve conseguir autenticar ou executar ações
+40. O bloqueio temporário deve durar 2 horas.
+41. Após 2 horas, o usuário pode solicitar desbloqueio via e-mail.
+42. Usuário bloqueado ou inativo não deve conseguir autenticar ou executar ações
     protegidas.
-42. Checkout, área do usuário, criação e gestão de eventos exigem usuário
+43. Checkout, área do usuário, criação e gestão de eventos exigem usuário
     autenticado, ativo e com e-mail verificado.
-43. Usuário autenticado sem e-mail verificado pode navegar e interagir com
+44. Usuário autenticado sem e-mail verificado pode navegar e interagir com
     eventos até antes de prosseguir no checkout.
-44. Após login, o usuário deve voltar para a última URL que exigiu autenticação;
+45. Após login, o usuário deve voltar para a última URL que exigiu autenticação;
     se não houver URL anterior, deve ir para a home.
+46. A tabela `VerificationToken` será usada para tokens próprios da aplicação
+    (`EMAIL_VERIFICATION`, `EMAIL_CHANGE`, `ACCOUNT_UNLOCK`) com hash. O provider
+    de magic link/e-mail do Auth.js fica fora da primeira versão.
 
 ## Fluxos principais
 
@@ -160,12 +165,12 @@ plataforma.
 
 ### Sessão
 
-1. Sistema emite JWT e refresh token.
-2. Sistema salva a sessão no banco.
-3. A cada acesso protegido, sistema valida JWT e existência/status da sessão no
-   banco.
-4. Se a sessão não existir, estiver expirada ou revogada, o acesso é negado.
-5. Logout limpa cookie/token e revoga a sessão.
+1. Sistema usa Auth.js com `session.strategy = "database"`.
+2. Sistema cria a sessão na tabela `Session`.
+3. Sistema grava em cookie `HttpOnly` apenas o token opaco da sessão.
+4. A cada acesso protegido, sistema valida a sessão no banco.
+5. Se a sessão não existir, estiver expirada ou revogada, o acesso é negado.
+6. Logout limpa o cookie e revoga/remove a sessão no banco.
 
 ### Reset de senha
 
@@ -212,7 +217,7 @@ plataforma.
 - Social login sem telefone deve redirecionar para step obrigatório de telefone.
 - Contas com mesmo e-mail verificado devem ser vinculadas automaticamente.
 - Sessão deve ser negada se estiver ausente, expirada ou revogada no banco.
-- Logout deve revogar a sessão e limpar cookie/token.
+- Logout deve revogar/remover a sessão e limpar cookie.
 - Deve ser possível manter múltiplas sessões por usuário.
 - Na 4ª tentativa inválida em fluxo sensível, usuário deve ser bloqueado por 2h.
 - Após 2h, usuário deve conseguir solicitar desbloqueio por e-mail.
@@ -242,13 +247,13 @@ plataforma.
 - Bloquear conta na 4ª tentativa inválida em fluxo sensível.
 - Permitir solicitação de desbloqueio após 2h.
 - Criar sessão persistida no banco no login.
-- Negar acesso com JWT válido mas sessão revogada/ausente no banco.
-- Revogar sessão no logout.
+- Negar acesso com sessão revogada/ausente no banco.
+- Revogar/remover sessão no logout.
 - Permitir múltiplas sessões por usuário.
 - Vincular provider social automaticamente por e-mail verificado.
 - Bloquear social login sem e-mail ou com e-mail não verificado.
 - Exigir telefone no segundo step para usuário social sem telefone.
-- Hashear tokens de verificação, reset, desbloqueio e refresh.
+- Hashear tokens de verificação, reset e desbloqueio.
 - Expirar verificação de e-mail após 24h.
 - Limitar reenvio de verificação a 1 por hora.
 - Executar reset de senha com token válido e senha forte.
@@ -258,8 +263,4 @@ plataforma.
 
 ## Decisões pendentes
 
-- Confirmar o schema final das tabelas `Account`, `Session`,
-  `VerificationToken` e `PasswordResetToken`.
-- Definir se tokens de desbloqueio usam tabela própria ou tabela genérica de
-  tokens.
 - Definir onde registrar o aceite dos termos para criação de eventos.
